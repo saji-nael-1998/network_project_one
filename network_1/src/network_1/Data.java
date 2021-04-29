@@ -19,6 +19,7 @@ public class Data {
 	}
 
 	public SmartPhone[] sortName(SmartPhone[] smartPhone) {
+		
 		for (int x = 0; x < smartPhone.length; x++) {
 			for (int y = 0; y < smartPhone.length; y++) {
 				if (smartPhone[x].getModel().compareTo(smartPhone[y].getModel()) < 1) {
@@ -54,4 +55,5 @@ public class Data {
 		return smartPhone;
 
 	}
+
 }

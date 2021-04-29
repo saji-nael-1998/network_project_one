@@ -1,7 +1,5 @@
 package network_1;
 
-import java.io.File;
-
 public class SmartPhone {
 	private String model;
 	private int price;
