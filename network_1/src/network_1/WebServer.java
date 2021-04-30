@@ -188,11 +188,11 @@ public class WebServer {
 			fileInputStream.read(theData);
 			fileInputStream.close();
 			// Send the headers
-			String response = "HTTP/1.0 200 OK" + "\\r\\n";
-			response += "Connection: Keep-Alive" + "\\r\\n";
-			response += "Date:" + new Date() + " GMT" + "\\r\\n";
-			response += "Server: Apache/2.4.6 (CentOS) OpenSSL/1.0.1e-fips PHP/5.4.16" + "\\r\\n";
-			response += "Last-Modified:" + new Date() + " GMT" + "\\r\\n";
+			String response = "HTTP/1.0 200 OK" + "\r\n";
+			response += "Connection: Keep-Alive" + "\r\n";
+			response += "Date:" + new Date() + " GMT" + "\r\n";
+			response += "Server: Apache/2.4.6 (CentOS) OpenSSL/1.0.1e-fips PHP/5.4.16" + "\r\n";
+			response += "Last-Modified:" + new Date() + " GMT" + "\r\n";
 			response += "Content-type: image/png\r\n";
 			printStream.print(response);
 			printStream.print("\r\n");
@@ -222,7 +222,7 @@ public class WebServer {
 			// Send the headers
 			String response = "HTTP/1.0 200 OK" + "\r\n";
 			response += "Connection: Keep-Alive" + "\r\n";
-			response += "Date:" + new Date() + " GMT" + "\r\\n";
+			response += "Date:" + new Date() + " GMT" + "\r\n";
 			response += "Server: Apache/2.4.6 (CentOS) OpenSSL/1.0.1e-fips PHP/5.4.16" + "\r\n";
 			response += "Last-Modified:" + new Date() + " GMT" + "\r\n";
 			response += "Content-type: image/jpg\r\n";
