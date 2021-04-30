@@ -5,10 +5,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Base64;
 import java.util.Date;
 
 public class WebServer {
@@ -177,27 +177,31 @@ public class WebServer {
 			System.out.println("=============================================================");
 		} else if (requestedFile.equals("/photo2.png"))
 
-		{
-
-			PrintWriter out = new PrintWriter(client.getOutputStream());
+		{	// read image
+			File theFile;
+			String file = "photo2.png";
+			PrintStream printStream = new PrintStream(client.getOutputStream());
+			theFile = new File(file);
+			FileInputStream fileInputStream = new FileInputStream(theFile);
+			//read as bytes
+			byte[] theData = new byte[(int) theFile.length()];
+			fileInputStream.read(theData);
+			fileInputStream.close();
 			// Send the headers
-			String response = "HTTP/1.0 200 OK" + "\n";
-			response += "Connection: Keep-Alive" + "\n";
-			response += "Date:" + new Date() + " GMT" + "\n";
-			response += "Server: Apache/2.4.6 (CentOS) OpenSSL/1.0.1e-fips PHP/5.4.16" + "\n";
-			response += "Last-Modified:" + new Date() + " GMT" + "\n";
-			response += "Content-Type: text/html" + "\n";
-
-			out.println(response);
-			// this blank line signals the end of the headers
-			out.println("");
-			// Send the HTML page
-			WebPages webPages = new WebPages();
-			String photo = webPages.readPageHTMLFile("photo_png.html");
-
-			out.println(photo);
-			out.flush();
+			String response = "HTTP/1.0 200 OK" + "\\r\\n";
+			response += "Connection: Keep-Alive" + "\\r\\n";
+			response += "Date:" + new Date() + " GMT" + "\\r\\n";
+			response += "Server: Apache/2.4.6 (CentOS) OpenSSL/1.0.1e-fips PHP/5.4.16" + "\\r\\n";
+			response += "Last-Modified:" + new Date() + " GMT" + "\\r\\n";
+			response += "Content-type: image/png\r\n";
+			printStream.print(response);
+			printStream.print("\r\n");
+			// End of headers
+			// Send file data
+			printStream.write(theData);
+			printStream.close();
 			client.close();
+
 			System.out.println("=============================================================");
 			System.out.println(requestedFile + " Response:");
 			System.out.println(response);
@@ -205,24 +209,31 @@ public class WebServer {
 		} else if (requestedFile.equals("/photo1.jpg"))
 
 		{
-
-			PrintWriter out = new PrintWriter(client.getOutputStream());
+			// read image
+			File theFile;
+			String file = "photo1.jpg";
+			PrintStream printStream = new PrintStream(client.getOutputStream());
+			theFile = new File(file);
+			FileInputStream fileInputStream = new FileInputStream(theFile);
+			//read as bytes
+			byte[] theData = new byte[(int) theFile.length()];
+			fileInputStream.read(theData);
+			fileInputStream.close();
 			// Send the headers
-			String response = "HTTP/1.0 200 OK" + "\n";
-			response += "Connection: Keep-Alive" + "\n";
-			response += "Date:" + new Date() + " GMT" + "\n";
-			response += "Server: Apache/2.4.6 (CentOS) OpenSSL/1.0.1e-fips PHP/5.4.16" + "\n";
-			response += "Last-Modified:" + new Date() + " GMT" + "\n";
-			response += "Content-Type: text/html" + "\n";
-			out.println(response);
-			// this blank line signals the end of the headers
-			out.println("");
-			// Send the HTML page
-			WebPages webPages = new WebPages();
-			String photo = webPages.readPageHTMLFile("photo_jpg.html");
-			out.println(photo);
-			out.flush();
+			String response = "HTTP/1.0 200 OK" + "\r\n";
+			response += "Connection: Keep-Alive" + "\r\n";
+			response += "Date:" + new Date() + " GMT" + "\r\\n";
+			response += "Server: Apache/2.4.6 (CentOS) OpenSSL/1.0.1e-fips PHP/5.4.16" + "\r\n";
+			response += "Last-Modified:" + new Date() + " GMT" + "\r\n";
+			response += "Content-type: image/jpg\r\n";
+			printStream.print(response);
+			printStream.print("\r\n");
+			// End of headers
+			// Send file data
+			printStream.write(theData);
+			printStream.close();
 			client.close();
+
 			System.out.println("=============================================================");
 			System.out.println(requestedFile + " Response:");
 			System.out.println(response);
